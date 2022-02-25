@@ -20,11 +20,11 @@ import copy
 from typing import Any, Dict, Generator, List, Optional, Tuple
 
 # ########## Change this variable ##############
-# mibi_directory = '/Users/yokote.k/Documents/MIBIprototype/mibilib'
+mibi_directory = '/Users/yokote.k/Documents/MIBIprototype/mibilib'
 # ##############################################
 
-# import sys
-# sys.path.append(mibi_directory)
+import sys
+sys.path.append(mibi_directory)
 from mibidata.tiff import read
 from mibitracker.request_helpers import MibiRequests
 from dotenv import load_dotenv
