@@ -31,11 +31,13 @@ from dotenv import load_dotenv
 
 from magicgui import magicgui
 
+from FOVlist import Options
+
 #@magicgui
 #def add_patients(patient0: str, patient1: str, patient):
 
 
-def tile(fov_list_json_file,  x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, map_patient, it):
+def tile(output_file, x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, map_patient):
     ''' Using a template json file, creates another fov json that includes
     the tiled version of the original FOV.
     Args:
@@ -49,19 +51,8 @@ def tile(fov_list_json_file,  x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, 
         overlap_y: The degree of overlap between tiles in the y direction.
     '''
 
-    with open(fov_list_json_file, 'r') as f:
-        fov_list_single = json.load(f)
-    dt = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
-    fov_list = {
-        'exportDateTime': dt,
-        'fovFormatVersion': fov_list_single['fovFormatVersion'],
-        'fovs': fov_list_single['fovs'][:]
-    }
+    options = Options()
 
-
-    fov_size = fov_list_single['fovs'][0]['fovSizeMicrons']
-    #x = fov_list_single['fovs'][0]['centerPointMicrons']['x']
-    #y = fov_list_single['fovs'][0]['centerPointMicrons']['y']
     x = int(x_0)
     y = int(y_0)
     overlap_x_microns = fov_size * overlap_x
@@ -72,36 +63,27 @@ def tile(fov_list_json_file,  x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, 
         for yi in np.arange(yn):
             cur_x = x + xi * (fov_size - overlap_x_microns)
             cur_y = y - yi * (fov_size - overlap_y_microns)
-            fov = copy.deepcopy(fov_list_single['fovs'][0])
-            fov['centerPointMicrons']['x'] = int(cur_x)
-            fov['centerPointMicrons']['y'] = int(cur_y)
-            fov['name'] = f'{map_patient}_{str(int(xi))}_{str(int(yi))}'
-            fov['sectionId'] = sectionID
-            fov['slideId'] = slideID
-            fov_list['fovs'].append(fov)
+
+            options.add_fov(
+                scanCount=1,
+                centerPointMicronX=int(cur_x), 
+                centerPointMicronY=int(cur_y),
+                fovSizeMicrons=fov_size,
+                name=f'{map_patient}_{str(int(xi))}_{str(int(yi))}',
+                sectionId=sectionID,
+                slideId=slideID
+                )
+            
             x_.append(cur_x)
             y_.append(cur_y)
 
 
-    json_file_dest = os.path.join(
-        os.path.dirname(fov_list_json_file), 'final.json')
+    
+    with open(output_file, 'w') as f:
+        json.dump(options.get_fov_list_dict(), f, indent=4)
 
-    with open(json_file_dest, 'w') as f:
-        json.dump(fov_list, f, indent=4)
+    return x_, y_
 
-    return json_file_dest, x_, y_
-
-
-def filter_coordinates(coord1, coord2):
-    x = np.abs(coord1[:,0] - coord2[:,0])
-    filter = []
-    filter_[0] = True
-    for n in range(1, x.shape[0]):
-        filter_[n] = True
-        if(x[n]-x[n+1] < 10 ):
-            filter_[n] = False
-
-    return coord[filter_]
 
 
 def transformation(x, y):
@@ -334,7 +316,7 @@ def def_slide(mibi_tracker_ID: int, login_details: Dict, patient_order: Dict) ->
     return patient_info
 
 
-def save_json(json_template, transformed_FOV_min, patient_info, fov_size, FOV_grid):
+def save_json(output_file, transformed_FOV_min, patient_info, fov_size, FOV_grid):
     '''
     :param json_template:
     :param transformed_FOV_min:
@@ -361,7 +343,7 @@ def save_json(json_template, transformed_FOV_min, patient_info, fov_size, FOV_gr
 
         print('Iteration: ', i, ' Patient number: ', patient_map, ' Grid of FOV: ', xn, 'x', yn )
 
-        json_template, x, y = tile(json_template, x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, patient_map, i)
+        x, y = tile(output_file, x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, patient_map, i)
         final_x = np.append(final_x, x)
         final_y = np.append(final_y, y)
     return final_x, final_y
