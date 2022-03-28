@@ -2,10 +2,12 @@ import napari
 import sys
 from tifffile import imread
 from skimage import io
+from skimage.filters import gaussian
 import numpy as np
 
 from skimage import img_as_ubyte
 from skimage.measure import find_contours
+from skimage.morphology import skeletonize
 from skimage.transform import resize
 import napari.layers
 from skimage.transform import rotate
@@ -201,6 +203,7 @@ def get_annotation_coords(target_image):
     '''
     #get yellow annotaitons based on colour
     new_image = (target_image[..., 0] > 160) * (target_image[..., 1] > 100) * (target_image[..., 2] < 180)
+    # skeletonised = skeletonize(new_image > 0)
     contours = find_contours(new_image)
     return contours, new_image
 
@@ -343,7 +346,7 @@ def save_json(output_file, transformed_FOV_min, patient_info, fov_size, FOV_grid
 
         print('Iteration: ', i, ' Patient number: ', patient_map, ' Grid of FOV: ', xn, 'x', yn )
 
-        x, y = tile(output_file, x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, patient_map, i)
+        x, y = tile(output_file, x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, patient_map)
         final_x = np.append(final_x, x)
         final_y = np.append(final_y, y)
     return final_x, final_y

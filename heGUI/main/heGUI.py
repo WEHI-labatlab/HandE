@@ -258,16 +258,10 @@ class heGUI:
 
         self.row = self.row + 1
 
-        self.napari_annotations_button = Button(window, text = "Check Annotations", width = 30)
+        self.napari_annotations_button = Button(window, text = "Check Annotations", width = 30, command=lambda : self.check_annotation())
         self.napari_annotations_button.grid(column=col_0, columnspan=3, row = self.row)
 
         self.row = self.row + 1
-
-        self.napar_final_check = Button(window, text="Final Check", width = 30)
-        self.napar_final_check.grid(column=col_0, columnspan=3, row = self.row)
-
-        self.row = self.row + 1
-
 
         sep5 = Separator(window,orient=HORIZONTAL).grid(row=self.row, column=col_0,  columnspan=5, sticky='we')
         self.row = self.row + 1
@@ -354,9 +348,10 @@ class heGUI:
         coord = he_script.get_corners(contours)
 
         #coord = coord[coord[:, 0].argsort()]
-
+        pad = lambda x: np.hstack([x, np.ones((x.shape[0], 1))])
+        unpad = lambda x: x[:, :-1]
         
-        self.A, res, rank, s = he_script.transformation(self.pad(self.get_optical_coord()), self.pad(self.get_sed_coord()))
+        self.A, res, rank, s = he_script.transformation(pad(self.get_optical_coord()), pad(self.get_sed_coord()))
 
         ## FOURTH STEP: plot coordinates and adjust if needed
 
@@ -370,7 +365,8 @@ class heGUI:
 
         self.checked = True
 
-    def get_optical_coor(self):
+
+    def get_optical_coord(self):
         if (len(self.point_one_x_entry.get())==0 | len(self.point_one_y_entry.get())==0 |
             len(self.point_two_x_entry.get())==0 | len(self.point_one_y_entry.get())==0 |
             len(self.point_three_x_entry.get())==0 | len(self.point_one_y_entry.get())==0):
@@ -382,7 +378,7 @@ class heGUI:
                 [int(self.point_two_x_entry.get()), int(self.point_two_y_entry.get())], 
                 [int(self.point_three_x_entry.get()), int(self.point_three_y_entry.get())]])
 
-    def get_sed_coor(self):
+    def get_sed_coord(self):
         if (len(self.point_one_x_sed_entry.get())==0 | len(self.point_one_y_sed_entry.get())==0 |
             len(self.point_two_x_sed_entry.get())==0 | len(self.point_one_y_sed_entry.get())==0 |
             len(self.point_three_x_sed_entry.get())==0 | len(self.point_one_y_sed_entry.get())==0):
@@ -395,11 +391,6 @@ class heGUI:
                 [int(self.point_three_x_sed_entry.get()), int(self.point_three_y_sed_entry.get())]])
 
 
-    def pad(self):
-        return lambda x: np.hstack([x, np.ones((x.shape[0], 1))])
-        
-    def unpad(self):
-        return lambda x: x[:, :-1] 
 
     def get_output_file_name(self):
         output_file = os.path.join(self.output_entry.get(), 
@@ -408,7 +399,8 @@ class heGUI:
         return output_file
 
     def generate_json(self):
-
+        pad = lambda x: np.hstack([x, np.ones((x.shape[0], 1))])
+        unpad = lambda x: x[:, :-1]
         if not self.checked:
             messagebox.showerror(title="Generate JSON", message="Annotation not checked")
             return
@@ -433,8 +425,8 @@ class heGUI:
         result = result[result[:, 0].argsort()]
 
         ## FITH STEP: Transform coordinates to the stage space
-        transformed_FOV_min = self.pad(np.flip(result[:,:2], axis=1))@self.A
-        transformed_FOV_max = self.pad(np.flip(result[:,2:], axis=1))@self.A
+        transformed_FOV_min = pad(np.flip(result[:,:2], axis=1))@self.A
+        transformed_FOV_max = pad(np.flip(result[:,2:], axis=1))@self.A
 
         ## SEVENTH STEP: SAVE JSON FILE WITH ALL THE FOVS
         if self.fov_combobox.get() == "400 \u03BCm":
@@ -466,7 +458,7 @@ class heGUI:
         final_x, final_y = save_json(self.get_output_file_name(),transformed_FOV_min, patient_info, fov_size, FOV_grid)
 
         ## EIGTH STEP: PLOT THE COORDINATES OF ALL FOVS
-        fovs_coord_optical = self.pad(np.concatenate((np.expand_dims(final_x, axis=1), np.expand_dims(final_y, axis=1)), axis=1))
+        fovs_coord_optical = pad(np.concatenate((np.expand_dims(final_x, axis=1), np.expand_dims(final_y, axis=1)), axis=1))
         fovs_coord_sed = fovs_coord_optical@np.linalg.inv(self.A)
         fovs_coord_viewer = napari.Viewer(title='Testing')
         fovs_coord_viewer.add_image(self.source_image, name='MIBI optical image')

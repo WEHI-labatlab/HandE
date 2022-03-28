@@ -1,0 +1,32 @@
+{
+    "exportDateTime": "2022-03-28T15:12:27",
+    "fovFormatVersion": "1.5",
+    "fovs": [
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": -8342,
+                "y": 20668
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": null,
+            "slideId": 28,
+            "name": "12MH1099_3_0_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        }
+    ]
+}
