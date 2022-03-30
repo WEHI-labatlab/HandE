@@ -39,7 +39,7 @@ from FOVlist import Options
 #def add_patients(patient0: str, patient1: str, patient):
 
 
-def tile(output_file, x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, map_patient):
+def tile(x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, map_patient, options):
     ''' Using a template json file, creates another fov json that includes
     the tiled version of the original FOV.
     Args:
@@ -53,7 +53,7 @@ def tile(output_file, x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID,
         overlap_y: The degree of overlap between tiles in the y direction.
     '''
 
-    options = Options()
+    
 
     x = int(x_0)
     y = int(y_0)
@@ -75,14 +75,9 @@ def tile(output_file, x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID,
                 sectionId=sectionID,
                 slideId=slideID
                 )
-            
+            print(options.get_fov_list_dict())
             x_.append(cur_x)
             y_.append(cur_y)
-
-
-    
-    with open(output_file, 'w') as f:
-        json.dump(options.get_fov_list_dict(), f, indent=4)
 
     return x_, y_
 
@@ -345,8 +340,11 @@ def save_json(output_file, transformed_FOV_min, patient_info, fov_size, FOV_grid
         patient_map = patient_info['patientMap'][i]
 
         print('Iteration: ', i, ' Patient number: ', patient_map, ' Grid of FOV: ', xn, 'x', yn )
+        options = Options()
+        x, y = tile(x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, patient_map, options)
+        with open(output_file, 'w') as f:
+            json.dump(options.get_fov_list_dict(), f, indent=4)
 
-        x, y = tile(output_file, x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, patient_map)
         final_x = np.append(final_x, x)
         final_y = np.append(final_y, y)
     return final_x, final_y

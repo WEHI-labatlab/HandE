@@ -12,9 +12,9 @@ class Options:
     def __init__(self) -> None:
         
         self.fov_list_dict = {}
-        self.fov_list_dict["exportDateTime"] = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
-        self.fov_list_dict["fovFormatVersion"] = "1.5"
-        self.fov_list_dict["fovs"] = []
+        self.export_date_time = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
+        self.fov_format_version = "1.5"
+        self.fovs = []
 
     def add_fov(self, scanCount : int, 
                     centerPointMicronX: int, 
@@ -32,7 +32,8 @@ class Options:
                     notes : str = None,
                     timingDescription : str = "1 ms"
                     ):
-        self.fov_list_dict["fovs"].append(
+        
+        self.fovs.append(
             {
             "scanCount": scanCount,
             "centerPointMicrons": {
@@ -62,4 +63,4 @@ class Options:
         )
 
     def get_fov_list_dict(self) -> Dict:
-        return self.fov_list_dict
+        return {"exportDateTime" : self.export_date_time, "fovFormatVersion" : self.fov_format_version, "fovs" : self.fovs}

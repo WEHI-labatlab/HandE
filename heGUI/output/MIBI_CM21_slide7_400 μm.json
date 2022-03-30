@@ -1,12 +1,12 @@
 {
-    "exportDateTime": "2022-03-28T15:12:27",
+    "exportDateTime": "2022-03-30T15:56:31",
     "fovFormatVersion": "1.5",
     "fovs": [
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": -8342,
-                "y": 20668
+                "x": 5155,
+                "y": 20711
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
