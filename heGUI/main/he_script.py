@@ -75,7 +75,7 @@ def tile(x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, m
                 sectionId=sectionID,
                 slideId=slideID
                 )
-            print(options.get_fov_list_dict())
+
             x_.append(cur_x)
             y_.append(cur_y)
 
@@ -291,7 +291,10 @@ def def_slide(mibi_tracker_ID: int, login_details: Dict, patient_order: Dict) ->
     password = login_details["password"]
     BACKEND_URL = login_details["BACKEND_URL"]
 
-    mr = MibiRequests(BACKEND_URL, email, password)
+    try:
+        mr = MibiRequests(BACKEND_URL, email, password)
+    except Exception as ex:
+        raise Exception("Password or Username is incorrect in dat file")
 
     single_slide = mr.get('/slides/{}/'.format(mibi_tracker_ID)).json()
 
@@ -310,13 +313,12 @@ def def_slide(mibi_tracker_ID: int, login_details: Dict, patient_order: Dict) ->
     patient_info = {'slideId': slide_id,
                     'patientMap': patient_order,
                     'sectionMap': section_map}
-
+    print(patient_info)
     return patient_info
 
 
-def save_json(output_file, transformed_FOV_min, patient_info, fov_size, FOV_grid):
+def get_fovs(transformed_FOV_min, patient_info, fov_size, FOV_grid):
     '''
-    :param json_template:
     :param transformed_FOV_min:
     :param patient_info:
     :param fov_size:
@@ -326,7 +328,8 @@ def save_json(output_file, transformed_FOV_min, patient_info, fov_size, FOV_grid
     final_x = np.empty(1)
     final_y = np.empty(1)
     assert transformed_FOV_min.shape[0] == len(patient_info['sectionMap']), 'There are more regions selected than patient, review your selections'
-
+    
+    options = Options()
     for i in range(len(patient_info['sectionMap'])):
 
         x_0 = transformed_FOV_min[i, 0] + fov_size/2
@@ -339,15 +342,15 @@ def save_json(output_file, transformed_FOV_min, patient_info, fov_size, FOV_grid
         slideID = patient_info['slideId']
         patient_map = patient_info['patientMap'][i]
 
-        print('Iteration: ', i, ' Patient number: ', patient_map, ' Grid of FOV: ', xn, 'x', yn )
-        options = Options()
+        
         x, y = tile(x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, patient_map, options)
-        with open(output_file, 'w') as f:
-            json.dump(options.get_fov_list_dict(), f, indent=4)
+        
 
         final_x = np.append(final_x, x)
         final_y = np.append(final_y, y)
-    return final_x, final_y
+    
+    
+    return final_x, final_y, options
 
 
 def main():
@@ -377,7 +380,6 @@ def main():
     password = os.getenv('MIBITRACKER_PUBLIC_PASSWORD')
     BACKEND_URL = os.getenv('MIBITRACKER_PUBLIC_URL')
     
-    print(email, password, BACKEND_URL)
 
     login_details = {"email": email, "password":password, "BACKEND_URL":BACKEND_URL}
 
@@ -463,7 +465,7 @@ def main():
     FOV_grid = np.abs(transformed_FOV_max-transformed_FOV_min)//(fov_size*0.9)
     json_template = PATH + 'fov-list.json'
     patient_info = def_slide(mibi_tracker_ID, login_details, patient_order)
-    final_x, final_y = save_json(json_template, transformed_FOV_min, patient_info, fov_size, FOV_grid)
+    final_x, final_y = get_fovs(json_template, transformed_FOV_min, patient_info, fov_size, FOV_grid)
 
 
     ## EIGTH STEP: PLOT THE COORDINATES OF ALL FOVS

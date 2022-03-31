@@ -1,12 +1,12 @@
 {
-    "exportDateTime": "2022-03-30T15:56:31",
+    "exportDateTime": "2022-03-31T14:16:30",
     "fovFormatVersion": "1.5",
     "fovs": [
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 5155,
-                "y": 20711
+                "x": 4893,
+                "y": 21098
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -25,6 +25,32 @@
             "sectionId": null,
             "slideId": 28,
             "name": "12MH1099_3_0_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 5253,
+                "y": 21098
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": null,
+            "slideId": 28,
+            "name": "12MH1099_3_1_0",
             "notes": null,
             "timingDescription": "1 ms"
         }

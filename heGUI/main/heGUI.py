@@ -25,7 +25,7 @@ from skimage.transform import rotate
 from matplotlib import pyplot as plt
 from dotenv import load_dotenv
 
-from he_script import save_json
+from he_script import get_fovs
 class heGUI:
 
     def __init__(self, window):
@@ -263,19 +263,22 @@ class heGUI:
 
         self.row = self.row + 1
 
+        self.fov_button = Button(window, text = "Check number of FOVS", width = 30, command=lambda : self.get_fovs())
+        self.fov_button.grid(column=col_0, columnspan=3, row = self.row)
+        self.row = self.row + 1
+
         sep5 = Separator(window,orient=HORIZONTAL).grid(row=self.row, column=col_0,  columnspan=5, sticky='we')
         self.row = self.row + 1
 
         
-
-        self.json_button = Button(window, text = "Generate JSON file", width = 30, command=lambda : self.generate_json())
-        self.json_button.grid(column=col_0, columnspan=3, row = self.row)
-
+        self.generate_json_button = Button(window, text = "Save JSON", width = 30, command = lambda : self.save_json())
+        self.generate_json_button.grid(column=col_0, columnspan=3, row = self.row)
         self.row = self.row + 1
 
         self.optical_placed = False
         self.he_placed = False
         self.checked = False
+        self.options = None
 
     def insert_row(self):
         self.patient_order_treeview.insert("", END, text=self.treeview_row, values= (self.patient_order_entry.get()))
@@ -398,26 +401,26 @@ class heGUI:
         )
         return output_file
 
-    def generate_json(self):
+    def get_fovs(self):
         pad = lambda x: np.hstack([x, np.ones((x.shape[0], 1))])
         unpad = lambda x: x[:, :-1]
         if not self.checked:
-            messagebox.showerror(title="Generate JSON", message="Annotation not checked")
+            messagebox.showerror(title="Check FOVs", message="Annotation not checked")
             return
         if not self.he_placed:
-            messagebox.showerror(title="Generate JSON", message="H&E landmarks not placed")
+            messagebox.showerror(title="Check FOVs", message="H&E landmarks not placed")
             return
         if not self.optical_placed:
-            messagebox.showerror(title="Generate JSON", message="Optical landmarks not placed")
+            messagebox.showerror(title="Check FOVs", message="Optical landmarks not placed")
             return
         if len(self.output_entry.get()) == 0:
-            messagebox.showerror(title="Generate JSON", message="No output folder selected")
+            messagebox.showerror(title="Check FOVs", message="No output folder selected")
             return 
         if len(self.file_naming_convention_entry.get()) == 0:
-            messagebox.showerror(title="Generate JSON", message="No file naming convention provided")
+            messagebox.showerror(title="Check FOVs", message="No file naming convention provided")
             return 
         if len(self.fov_combobox.get()) == 0:
-            messagebox.showerror(title="Generate JSON", message="No FOV selected")
+            messagebox.showerror(title="Check FOVs", message="No FOV selected")
             return 
 
         ## Concatenate coordinates and sort again in case it has been adjusted
@@ -440,22 +443,25 @@ class heGUI:
             i = i + 1
 
         FOV_grid = np.abs(transformed_FOV_max-transformed_FOV_min)//(fov_size*0.9)
-        
+
+        fname_login = self.dat_file_entry.get()
+        load_dotenv(fname_login)
+
         email = os.getenv('MIBITRACKER_PUBLIC_EMAIL')
         password = os.getenv('MIBITRACKER_PUBLIC_PASSWORD')
         BACKEND_URL = os.getenv('MIBITRACKER_PUBLIC_URL')
 
-        
-
-        fname_login = self.dat_file_entry.get()
-        load_dotenv(fname_login)
         login_details = {"email": email, "password":password, "BACKEND_URL":BACKEND_URL}
 
         mibi_tracker_ID = int(self.mibi_tracker_ID_entry.get())
 
-        patient_info = he_script.def_slide(mibi_tracker_ID, login_details, patient_order)
+        try:
+            patient_info = he_script.def_slide(mibi_tracker_ID, login_details, patient_order)
+        except Exception as e:
+            messagebox.showerror(title="Check FOVs", message=e.args)
+            return
         
-        final_x, final_y = save_json(self.get_output_file_name(),transformed_FOV_min, patient_info, fov_size, FOV_grid)
+        final_x, final_y, self.options = get_fovs(transformed_FOV_min, patient_info, fov_size, FOV_grid)
 
         ## EIGTH STEP: PLOT THE COORDINATES OF ALL FOVS
         fovs_coord_optical = pad(np.concatenate((np.expand_dims(final_x, axis=1), np.expand_dims(final_y, axis=1)), axis=1))
@@ -466,6 +472,15 @@ class heGUI:
         napari.run()
 
         return 
+
+    def save_json(self):
+        if self.options == None:
+            messagebox.showerror(title="Save JSON", message="FOVS not checked")
+            return
+        messagebox.showinfo(title="Save JSON", message="Saved")
+        return
+
+    
 
 
 window = Tk()
