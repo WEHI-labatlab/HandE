@@ -1,12 +1,12 @@
 {
-    "exportDateTime": "2022-03-31T14:16:30",
+    "exportDateTime": "2022-04-01T17:14:56",
     "fovFormatVersion": "1.5",
     "fovs": [
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 4893,
-                "y": 21098
+                "x": 14442,
+                "y": 33710
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -24,15 +24,15 @@
             },
             "sectionId": null,
             "slideId": 28,
-            "name": "12MH1099_3_0_0",
+            "name": "15MH0258_0_0",
             "notes": null,
             "timingDescription": "1 ms"
         },
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 5253,
-                "y": 21098
+                "x": 14442,
+                "y": 33350
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -50,7 +50,787 @@
             },
             "sectionId": null,
             "slideId": 28,
-            "name": "12MH1099_3_1_0",
+            "name": "15MH0258_0_1",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 14442,
+                "y": 32990
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": null,
+            "slideId": 28,
+            "name": "15MH0258_0_2",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 14802,
+                "y": 33710
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": null,
+            "slideId": 28,
+            "name": "15MH0258_1_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 14802,
+                "y": 33350
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": null,
+            "slideId": 28,
+            "name": "15MH0258_1_1",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 14802,
+                "y": 32990
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": null,
+            "slideId": 28,
+            "name": "15MH0258_1_2",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 15162,
+                "y": 33710
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": null,
+            "slideId": 28,
+            "name": "15MH0258_2_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 15162,
+                "y": 33350
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": null,
+            "slideId": 28,
+            "name": "15MH0258_2_1",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 15162,
+                "y": 32990
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": null,
+            "slideId": 28,
+            "name": "15MH0258_2_2",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 17803,
+                "y": 24729
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_0_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 17803,
+                "y": 24369
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_0_1",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 17803,
+                "y": 24009
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_0_2",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 17803,
+                "y": 23649
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_0_3",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 18163,
+                "y": 24729
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_1_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 18163,
+                "y": 24369
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_1_1",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 18163,
+                "y": 24009
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_1_2",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 18163,
+                "y": 23649
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_1_3",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 18523,
+                "y": 24729
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_2_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 18523,
+                "y": 24369
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_2_1",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 18523,
+                "y": 24009
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_2_2",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 18523,
+                "y": 23649
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 119,
+            "slideId": 28,
+            "name": "12SH095_2_3",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 8430,
+                "y": 23794
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 121,
+            "slideId": 28,
+            "name": "13MH1053_0_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 8430,
+                "y": 23434
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 121,
+            "slideId": 28,
+            "name": "13MH1053_0_1",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 8430,
+                "y": 23074
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 121,
+            "slideId": 28,
+            "name": "13MH1053_0_2",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 8790,
+                "y": 23794
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 121,
+            "slideId": 28,
+            "name": "13MH1053_1_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 8790,
+                "y": 23434
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 121,
+            "slideId": 28,
+            "name": "13MH1053_1_1",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 8790,
+                "y": 23074
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 121,
+            "slideId": 28,
+            "name": "13MH1053_1_2",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 9150,
+                "y": 23794
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 121,
+            "slideId": 28,
+            "name": "13MH1053_2_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 9150,
+                "y": 23434
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 121,
+            "slideId": 28,
+            "name": "13MH1053_2_1",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 9150,
+                "y": 23074
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 121,
+            "slideId": 28,
+            "name": "13MH1053_2_2",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 4860,
+                "y": 21001
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 122,
+            "slideId": 28,
+            "name": "12MH1099_0_0",
+            "notes": null,
+            "timingDescription": "1 ms"
+        },
+        {
+            "scanCount": 1,
+            "centerPointMicrons": {
+                "x": 5220,
+                "y": 21001
+            },
+            "fovSizeMicrons": 400,
+            "timingChoice": 7,
+            "frameSizePixels": {
+                "width": 1024,
+                "height": 1024
+            },
+            "imagingPreset": {
+                "preset": "Normal",
+                "aperture": "2",
+                "displayName": "Fine",
+                "defaults": {
+                    "timingChoice": 7
+                }
+            },
+            "sectionId": 122,
+            "slideId": 28,
+            "name": "12MH1099_1_0",
             "notes": null,
             "timingDescription": "1 ms"
         }

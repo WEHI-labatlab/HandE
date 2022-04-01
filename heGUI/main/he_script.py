@@ -8,6 +8,8 @@ import numpy as np
 from skimage import img_as_ubyte
 from skimage.measure import find_contours
 from skimage.morphology import skeletonize
+from skimage.measure import regionprops
+from skimage.measure import label
 from skimage.transform import resize
 import napari.layers
 from skimage.transform import rotate
@@ -199,28 +201,37 @@ def get_annotation_coords(target_image):
     #get yellow annotaitons based on colour
     new_image = (target_image[..., 0] > 160) * (target_image[..., 1] > 100) * (target_image[..., 2] < 180)
     # skeletonised = skeletonize(new_image > 0)
-    contours = find_contours(new_image)
-    return contours, new_image
+    label_im = label(new_image.astype(np.uint8))
+    regions = regionprops(label_im)
+    
+
+    # contours = find_contours(new_image)
+    return regions, new_image
 
 
-def get_corners(contours):
+def get_corners(regions, n_annots):
     '''
     Get coordinates of the corner right and left of the contours
     :param contours:list of (n,2)-ndarrays
     :return:array of (n,4) with (n,2) top right and (n,2)left corners for each rectangle
     '''
+    regions.sort(key=lambda x: x.area, reverse=True)
+    regions = regions[:n_annots]
     corners = []
-    for n in range(len(contours)):
+    for region in regions:
         #n = n*2
-        x_coord_min = contours[n][:,0].min()
-        y_coord_min = contours[n][:,1].min()
+        x_coord_min = region.coords[:,0].min()
+        y_coord_min = region.coords[:,1].min()
 
-        x_coord_max = contours[n][:,0].max()
-        y_coord_max = contours[n][:,1].max()
+        x_coord_max = region.coords[:,0].max()
+        y_coord_max = region.coords[:,1].max()
 
         #filtering out noise
-        if x_coord_max > 5+x_coord_min and y_coord_max > 5+y_coord_min:
-            corners.append((x_coord_min, y_coord_min, x_coord_max, y_coord_max))
+        # if x_coord_max > 5+x_coord_min and y_coord_max > 5+y_coord_min:
+        corners.append((x_coord_min, y_coord_min, x_coord_max, y_coord_max))
+    
+    corners = sorted(corners, key=lambda element: (element[1], element[2]))
+    
     return np.array(corners)
 
 

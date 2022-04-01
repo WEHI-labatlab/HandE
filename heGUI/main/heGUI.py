@@ -345,10 +345,12 @@ class heGUI:
         pts_mov = np.flip(self.source_points.data, axis=1)
         transformed_target = img_as_ubyte(he_script.align_images(self.target_image, pts_ref, pts_mov))
 
-
+        i = len(self.patient_order_treeview.get_children())
+            
+        
         ## THIRD STEP: get coordinates from he annotations
         contours, binary_rect = he_script.get_annotation_coords(transformed_target)
-        coord = he_script.get_corners(contours)
+        coord = he_script.get_corners(contours, i)
 
         #coord = coord[coord[:, 0].argsort()]
         pad = lambda x: np.hstack([x, np.ones((x.shape[0], 1))])
@@ -362,6 +364,7 @@ class heGUI:
         self.test_viewer.add_image(transformed_target, name='Transformed H&E')
         self.test_viewer.add_image(binary_rect, name='Annotations')
         self.test_viewer.add_image(self.source_image, name='MIBI optical image')
+        print(coord)
         self.test_points_min = self.test_viewer.add_points(coord[:, :2])
         self.test_points_max = self.test_viewer.add_points(coord[:, 2:])
         napari.run()
@@ -477,6 +480,9 @@ class heGUI:
         if self.options == None:
             messagebox.showerror(title="Save JSON", message="FOVS not checked")
             return
+
+        with open(self.get_output_file_name(), 'w') as f:
+            json.dump(self.options.get_fov_list_dict(), f, indent=4)
         messagebox.showinfo(title="Save JSON", message="Saved")
         return
 
