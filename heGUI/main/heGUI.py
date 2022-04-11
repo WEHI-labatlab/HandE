@@ -6,26 +6,17 @@ from tkinter.ttk import *
 import he_script
 
 import os
-import sys
 import json
-import datetime
-import copy
 
 import napari
-import sys
-from tifffile import imread
 from skimage import io
 import numpy as np
 
 from skimage import img_as_ubyte
-from skimage.measure import find_contours
-from skimage.transform import resize
 import napari.layers
-from skimage.transform import rotate
-from matplotlib import pyplot as plt
 from dotenv import load_dotenv
-
 from he_script import get_fovs
+
 class heGUI:
 
     def __init__(self, window):
@@ -364,7 +355,6 @@ class heGUI:
         self.test_viewer.add_image(transformed_target, name='Transformed H&E')
         self.test_viewer.add_image(binary_rect, name='Annotations')
         self.test_viewer.add_image(self.source_image, name='MIBI optical image')
-        print(coord)
         self.test_points_min = self.test_viewer.add_points(coord[:, :2])
         self.test_points_max = self.test_viewer.add_points(coord[:, 2:])
         napari.run()

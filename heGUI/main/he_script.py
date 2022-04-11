@@ -1,44 +1,17 @@
-import napari
-import sys
+
+
+
 from tifffile import imread
 from skimage import io
-from skimage.filters import gaussian
 import numpy as np
 
-from skimage import img_as_ubyte
-from skimage.measure import find_contours
-from skimage.morphology import skeletonize
 from skimage.measure import regionprops
 from skimage.measure import label
 from skimage.transform import resize
-import napari.layers
-from skimage.transform import rotate
-from matplotlib import pyplot as plt
 
-import os
-import sys
-import json
-import datetime
-import copy
-
-from typing import Any, Dict, Generator, List, Optional, Tuple
-
-# ########## Change this variable ##############
-mibi_directory = '/Users/yokote.k/Documents/MIBIprototype/mibilib'
-# ##############################################
-
-import sys
-sys.path.append(mibi_directory)
-from mibidata.tiff import read
+from typing import Dict
 from mibitracker.request_helpers import MibiRequests
-from dotenv import load_dotenv
-
-from magicgui import magicgui
-
 from FOVlist import Options
-
-#@magicgui
-#def add_patients(patient0: str, patient1: str, patient):
 
 
 def tile(x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, map_patient, options):
@@ -56,7 +29,6 @@ def tile(x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, m
     '''
 
     
-
     x = int(x_0)
     y = int(y_0)
     overlap_x_microns = fov_size * overlap_x
@@ -244,34 +216,6 @@ def resize_(mov, ref):
     '''
     return resize(ref, (mov.shape[0], mov.shape[1]))
 
-
-def rgb2gray(rgb):
-    '''
-    Converts rgb image to grayscale
-    :param rgb: input rgb image
-    :return: grayscale image
-    '''
-    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
-
-
-def load_jpg(path):
-    '''
-    Load jpg files into numpy array
-    :param path: path to jpg file
-    :return: numpy array with the image
-    '''
-    return io.imread(path)
-
-
-def load_tif(path):
-    '''
-    Load tif images into numpy array
-    :param path:path to tif file
-    :return: numpy array with the image
-    '''
-    return imread(path)
-
-
 def align_images(target_image, pts_ref, pts_mov):
     '''
     :param target_image: HE image
@@ -362,132 +306,3 @@ def get_fovs(transformed_FOV_min, patient_info, fov_size, FOV_grid):
     
     
     return final_x, final_y, options
-
-
-def main():
-
-    #with napari.gui_qt() as app: //deprecated
-
-    SAVE_HE = True
-    LOAD_HE = False
-
-    LOAD_COORD = False
-    SAVE_COORD = True
-
-    PATH = '/Users/yokote.k/Desktop/MIBI/HE_GUI/heGUI/data'
-    fov_size = 400
-    slide_num = 7
-    mibi_tracker_ID = 28 
-    
-    file_naming_convention = "MIBI_CM21"
-
-    patient_order = {0: 'TOP 15MH0258', 1: '12SH095', 2: '13MH1053', 3: '12MH1099', 4: 'BOTTOM RIGHT'}
-
-    fname_login = '/Users/yokote.k/Desktop/MIBI/HE_GUI/heGUI/data/MIBItracker_login.dat'
-    load_dotenv(fname_login)
-
-    # This assumes your MIBItracker credentials are saved as environment variables.
-    email = os.getenv('MIBITRACKER_PUBLIC_EMAIL')
-    password = os.getenv('MIBITRACKER_PUBLIC_PASSWORD')
-    BACKEND_URL = os.getenv('MIBITRACKER_PUBLIC_URL')
-    
-
-    login_details = {"email": email, "password":password, "BACKEND_URL":BACKEND_URL}
-
-    if slide_num < 10:
-        slide_num = f'0{slide_num}'
-
-    ## Tranformation between SED and stage
-    optical_coord = np.array([[763, 426],
-                              [762, 667],
-                              [428, 425]])
-
-
-    sed_coord = np.array([[22710, 48298],
-                          [22714, 32708],
-                          [894, 48294]])
-
-    ##FIRST STEP: PLACE LANDMARKS
-    source_image = load_jpg(f'{PATH}/{file_naming_convention}-{slide_num}.png')
-    target_image = load_jpg(f'{PATH}/{file_naming_convention}-{slide_num}_he.jpg')
-    target_image = resize_(source_image, target_image)
-
-
-    source_viewer = napari.Viewer(title='Transformibi [source]')
-    target_viewer = napari.Viewer(title='Transformibi [target]')
-    source_viewer.add_image(source_image)
-    target_viewer.add_image(target_image)
-    #target_viewer.window.add_dock_widget(my_widget, area='right')
-    #my_widget()
-    target_points = target_viewer.add_points()
-    source_points = source_viewer.add_points()
-    napari.run()
-
-
-    ## SECOND STEP: PERFORM ALIGNMENT
-    pts_ref = np.flip(target_points.data, axis=1)
-    pts_mov = np.flip(source_points.data, axis=1)
-    transformed_target = img_as_ubyte(align_images(target_image, pts_ref, pts_mov))
-
-    if SAVE_HE:
-        io.imsave(f'{PATH}{file_naming_convention}-{slide_num}_transformed_final.png', transformed_target)
-
-    if LOAD_HE:
-        transformed_target = load_jpg(f'{PATH}{file_naming_convention}-{slide_num}_transformed_final.png')
-
-
-        ## THIRD STEP: get coordinates from he annotations
-    contours, binary_rect = get_annotation_coords(transformed_target)
-    coord = get_corners(contours)
-
-    if LOAD_COORD:
-        coord = np.load(f'{PATH}coord_{slide_num}.npy')
-
-    #coord = coord[coord[:, 0].argsort()]
-
-    pad = lambda x: np.hstack([x, np.ones((x.shape[0], 1))])
-    unpad = lambda x: x[:, :-1]
-    A, res, rank, s = transformation(pad(optical_coord), pad(sed_coord))
-
-    ## FOURTH STEP: plot coordinates and adjust if needed
-
-    test_viewer = napari.Viewer(title='Test coordinates')
-    test_viewer.add_image(transformed_target, name='Transformed H&E')
-    test_viewer.add_image(binary_rect, name='Annotations')
-    test_viewer.add_image(source_image, name='MIBI optical image')
-    test_points_min = test_viewer.add_points(coord[:, :2])
-    test_points_max = test_viewer.add_points(coord[:, 2:])
-    napari.run()
-
-    ## Concatenate coordinates and sort again in case it has been adjusted
-    result = np.concatenate((test_points_min.data, test_points_max.data), axis=1)
-    result = result[result[:, 0].argsort()]
-
-    if SAVE_COORD:
-        #to_save = np.concatenate((np.flip(test_points_min.data), np.flip(test_points_max.data)), axis=1)
-        np.save(f'{PATH}coord_{slide_num}.npy', result)
-
-    ## FITH STEP: Transform coordinates to the stage space
-    transformed_FOV_min = pad(np.flip(result[:,:2], axis=1))@A
-    transformed_FOV_max = pad(np.flip(result[:,2:], axis=1))@A
-
-    ## SEVENTH STEP: SAVE JSON FILE WITH ALL THE FOVS
-
-    FOV_grid = np.abs(transformed_FOV_max-transformed_FOV_min)//(fov_size*0.9)
-    json_template = PATH + 'fov-list.json'
-    patient_info = def_slide(mibi_tracker_ID, login_details, patient_order)
-    final_x, final_y = get_fovs(json_template, transformed_FOV_min, patient_info, fov_size, FOV_grid)
-
-
-    ## EIGTH STEP: PLOT THE COORDINATES OF ALL FOVS
-    fovs_coord_optical = pad(np.concatenate((np.expand_dims(final_x, axis=1), np.expand_dims(final_y, axis=1)), axis=1))
-    fovs_coord_sed = fovs_coord_optical@np.linalg.inv(A)
-    fovs_coord_viewer = napari.Viewer(title='Testing')
-    fovs_coord_viewer.add_image(source_image, name='MIBI optical image')
-    fovs_coord_viewer.add_points(np.flip(fovs_coord_sed[:, :2], axis=1))
-    napari.run()
-
-    return 0
-
-if __name__ == '__main__':
-    sys.exit(main())

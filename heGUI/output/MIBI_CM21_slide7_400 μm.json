@@ -1,12 +1,12 @@
 {
-    "exportDateTime": "2022-04-01T17:14:56",
+    "exportDateTime": "2022-04-11T16:17:31",
     "fovFormatVersion": "1.5",
     "fovs": [
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 14442,
-                "y": 33710
+                "x": 14702,
+                "y": 33775
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -31,8 +31,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 14442,
-                "y": 33350
+                "x": 14702,
+                "y": 33415
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -57,8 +57,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 14442,
-                "y": 32990
+                "x": 14702,
+                "y": 33055
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -83,8 +83,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 14802,
-                "y": 33710
+                "x": 15062,
+                "y": 33775
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -109,8 +109,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 14802,
-                "y": 33350
+                "x": 15062,
+                "y": 33415
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -135,8 +135,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 14802,
-                "y": 32990
+                "x": 15062,
+                "y": 33055
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -161,8 +161,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 15162,
-                "y": 33710
+                "x": 15422,
+                "y": 33775
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -187,8 +187,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 15162,
-                "y": 33350
+                "x": 15422,
+                "y": 33415
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -213,8 +213,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 15162,
-                "y": 32990
+                "x": 15422,
+                "y": 33055
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -239,8 +239,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 17803,
-                "y": 24729
+                "x": 17868,
+                "y": 24858
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -265,8 +265,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 17803,
-                "y": 24369
+                "x": 17868,
+                "y": 24498
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -291,8 +291,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 17803,
-                "y": 24009
+                "x": 17868,
+                "y": 24138
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -317,8 +317,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 17803,
-                "y": 23649
+                "x": 17868,
+                "y": 23778
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -343,8 +343,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 18163,
-                "y": 24729
+                "x": 18228,
+                "y": 24858
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -369,8 +369,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 18163,
-                "y": 24369
+                "x": 18228,
+                "y": 24498
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -395,8 +395,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 18163,
-                "y": 24009
+                "x": 18228,
+                "y": 24138
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -421,8 +421,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 18163,
-                "y": 23649
+                "x": 18228,
+                "y": 23778
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -447,8 +447,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 18523,
-                "y": 24729
+                "x": 18588,
+                "y": 24858
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -473,8 +473,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 18523,
-                "y": 24369
+                "x": 18588,
+                "y": 24498
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -499,8 +499,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 18523,
-                "y": 24009
+                "x": 18588,
+                "y": 24138
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -525,8 +525,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 18523,
-                "y": 23649
+                "x": 18588,
+                "y": 23778
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -551,8 +551,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 8430,
-                "y": 23794
+                "x": 8494,
+                "y": 24053
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -577,8 +577,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 8430,
-                "y": 23434
+                "x": 8494,
+                "y": 23693
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -603,8 +603,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 8430,
-                "y": 23074
+                "x": 8494,
+                "y": 23333
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -629,8 +629,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 8790,
-                "y": 23794
+                "x": 8854,
+                "y": 24053
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -655,8 +655,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 8790,
-                "y": 23434
+                "x": 8854,
+                "y": 23693
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -681,8 +681,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 8790,
-                "y": 23074
+                "x": 8854,
+                "y": 23333
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -707,8 +707,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 9150,
-                "y": 23794
+                "x": 9214,
+                "y": 24053
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -733,8 +733,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 9150,
-                "y": 23434
+                "x": 9214,
+                "y": 23693
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -759,8 +759,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 9150,
-                "y": 23074
+                "x": 9214,
+                "y": 23333
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -785,8 +785,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 4860,
-                "y": 21001
+                "x": 4534,
+                "y": 21194
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
@@ -811,8 +811,8 @@
         {
             "scanCount": 1,
             "centerPointMicrons": {
-                "x": 5220,
-                "y": 21001
+                "x": 4894,
+                "y": 21194
             },
             "fovSizeMicrons": 400,
             "timingChoice": 7,
