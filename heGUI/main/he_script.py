@@ -188,8 +188,14 @@ def get_corners(regions, n_annots):
     :return:array of (n,4) with (n,2) top right and (n,2)left corners for each rectangle
     '''
     regions.sort(key=lambda x: x.area, reverse=True)
-    regions = regions[:n_annots]
+
+    max_diff_pair = (0, 0)
+    for i in range(1, len(regions)):
+        if (abs(regions[i - 1].area - regions[i].area) / regions[i - 1].area) > max_diff_pair[1]:
+            max_diff_pair = (i, (abs(regions[i - 1].area - regions[i].area) / regions[i - 1].area))
+    regions = regions[:max_diff_pair[0]]
     corners = []
+    print(max_diff_pair)
     for region in regions:
         #n = n*2
         x_coord_min = region.coords[:,0].min()
@@ -202,7 +208,7 @@ def get_corners(regions, n_annots):
         # if x_coord_max > 5+x_coord_min and y_coord_max > 5+y_coord_min:
         corners.append((x_coord_min, y_coord_min, x_coord_max, y_coord_max))
     
-    corners = sorted(corners, key=lambda element: (element[1], element[2]))
+    corners = sorted(corners, key=lambda element: (element[1], element[0]))
     
     return np.array(corners)
 
