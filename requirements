@@ -1,7 +1,0 @@
-pystackreg
-napari[all]
-scikit-image
-python-dotenv==0.19.0
-git+git://github.com/ionpath/mibilib@v1.4.1
-magicgui[pyqt5]
-
