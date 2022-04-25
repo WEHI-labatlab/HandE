@@ -1,4 +1,10 @@
+"""
+The purpose of this project is to create a user friendly way of transfering
+annotations made on H&E slides in QuPath or CaseViewer onto the optical image
+which will be used in the scanning in MIBI. 
 
+@Author: Nina Tubau & Kenta Yokote
+"""
 
 
 from tifffile import imread
@@ -297,6 +303,8 @@ def get_fovs(transformed_FOV_min, patient_info, fov_size, FOV_grid):
         y_0 = transformed_FOV_min[i, 1] - fov_size/2
         xn = FOV_grid[i, 0]
         yn = FOV_grid[i, 1]
+        
+        # Overlap between adjacent FOVs
         overlap_x = 0.1
         overlap_y = 0.1
         sectionID = patient_info['sectionMap'][i]

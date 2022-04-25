@@ -24,8 +24,6 @@ class Options:
                     name : str,
                     fovSizeMicrons : int = 400,
                     timingChoice : int = 7,
-                    frameSizePixelsX : int = 1024, 
-                    frameSizePixelsY : int = 1024,
                     preset : str = "Normal", 
                     aperture : str = "2",
                     displayName : str = "Fine",
@@ -33,6 +31,17 @@ class Options:
                     timingDescription : str = "1 ms"
                     ):
         
+        if fovSizeMicrons == 400:
+            frameSizePixelsX = 1024
+            frameSizePixelsY = 1024
+        elif fovSizeMicrons == 800:
+            frameSizePixelsX = 2048
+            frameSizePixelsY = 2048
+        else:
+            fovSizeMicrons = 400
+            frameSizePixelsX = 1024
+            frameSizePixelsY = 1024
+
         self.fovs.append(
             {
             "scanCount": scanCount,

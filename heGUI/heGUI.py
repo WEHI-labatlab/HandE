@@ -1,3 +1,11 @@
+"""
+The purpose of this project is to create a user friendly way of transfering
+annotations made on H&E slides in QuPath or CaseViewer onto the optical image
+which will be used in the scanning in MIBI. 
+
+@Author: Nina Tubau & Kenta Yokote
+"""
+
 from tkinter import filedialog as fd
 from tkinter import *
 from tkinter import messagebox
