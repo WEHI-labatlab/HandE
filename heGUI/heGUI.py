@@ -344,8 +344,8 @@ class heGUI:
         transformed_target = img_as_ubyte(he_script.align_images(self.target_image, pts_ref, pts_mov))
 
         i = len(self.patient_order_treeview.get_children())
-            
-        
+
+
         ## THIRD STEP: get coordinates from he annotations
         contours, binary_rect = he_script.get_annotation_coords(transformed_target)
         coord = he_script.get_corners(contours, i)
@@ -353,7 +353,7 @@ class heGUI:
         #coord = coord[coord[:, 0].argsort()]
         pad = lambda x: np.hstack([x, np.ones((x.shape[0], 1))])
         unpad = lambda x: x[:, :-1]
-        
+
         self.A, res, rank, s = he_script.transformation(pad(self.get_optical_coord()), pad(self.get_sed_coord()))
 
         ## FOURTH STEP: plot coordinates and adjust if needed
@@ -375,7 +375,7 @@ class heGUI:
             len(self.point_three_x_entry.get())==0 | len(self.point_one_y_entry.get())==0):
             messagebox.showerror(title="Optical coordinates", message="One or more of the optical coordinates are not filled")
             return
-        
+
         return np.array([
                 [int(self.point_one_x_entry.get()), int(self.point_one_y_entry.get())],
                 [int(self.point_two_x_entry.get()), int(self.point_two_y_entry.get())], 
@@ -387,7 +387,7 @@ class heGUI:
             len(self.point_three_x_sed_entry.get())==0 | len(self.point_one_y_sed_entry.get())==0):
             messagebox.showerror(title="Optical coordinates", message="One or more of the optical coordinates are not filled")
             return
-        
+
         return np.array([
                 [int(self.point_one_x_sed_entry.get()), int(self.point_one_y_sed_entry.get())],
                 [int(self.point_two_x_sed_entry.get()), int(self.point_two_y_sed_entry.get())], 
@@ -415,13 +415,13 @@ class heGUI:
             return
         if len(self.output_entry.get()) == 0:
             messagebox.showerror(title="Check FOVs", message="No output folder selected")
-            return 
+            return
         if len(self.file_naming_convention_entry.get()) == 0:
             messagebox.showerror(title="Check FOVs", message="No file naming convention provided")
-            return 
+            return
         if len(self.fov_combobox.get()) == 0:
             messagebox.showerror(title="Check FOVs", message="No FOV selected")
-            return 
+            return
 
         ## Concatenate coordinates and sort again in case it has been adjusted
         result = np.concatenate((self.test_points_min.data, self.test_points_max.data), axis=1)
@@ -460,7 +460,7 @@ class heGUI:
         except Exception as e:
             messagebox.showerror(title="Check FOVs", message=e.args)
             return
-        
+
         final_x, final_y, self.options = get_fovs(transformed_FOV_min, patient_info, fov_size, FOV_grid)
 
         ## EIGTH STEP: PLOT THE COORDINATES OF ALL FOVS
@@ -471,7 +471,7 @@ class heGUI:
         fovs_coord_viewer.add_points(np.flip(fovs_coord_sed[:, :2], axis=1))
         napari.run()
 
-        return 
+        return
 
     def save_json(self):
         if self.options == None:
@@ -483,7 +483,7 @@ class heGUI:
         messagebox.showinfo(title="Save JSON", message="Saved")
         return
 
-    
+
 
 
 window = Tk()
