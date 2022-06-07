@@ -7,30 +7,30 @@ from typing import Dict
 
 
 class Options:
-    
+
 
     def __init__(self) -> None:
-        
+
         self.fov_list_dict = {}
         self.export_date_time = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')
         self.fov_format_version = "1.5"
         self.fovs = []
 
-    def add_fov(self, scanCount : int, 
-                    centerPointMicronX: int, 
-                    centerPointMicronY: int, 
+    def add_fov(self, scanCount : int,
+                    centerPointMicronX: int,
+                    centerPointMicronY: int,
                     sectionId : int,
                     slideId : int,
                     name : str,
                     fovSizeMicrons : int = 400,
                     timingChoice : int = 7,
-                    preset : str = "Normal", 
+                    preset : str = "Normal",
                     aperture : str = "2",
                     displayName : str = "Fine",
                     notes : str = None,
                     timingDescription : str = "1 ms"
                     ):
-        
+
         if fovSizeMicrons == 400:
             frameSizePixelsX = 1024
             frameSizePixelsY = 1024

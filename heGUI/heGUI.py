@@ -1,7 +1,7 @@
 """
 The purpose of this project is to create a user friendly way of transfering
 annotations made on H&E slides in QuPath or CaseViewer onto the optical image
-which will be used in the scanning in MIBI. 
+which will be used in the scanning in MIBI.
 
 @Author: Nina Tubau & Kenta Yokote
 """
@@ -34,10 +34,10 @@ class heGUI:
         col_0 = 0
         col_1 = 1
         col_2 = 2
-        self.row = 0 
+        self.row = 0
 
         self.message_box = Message(window)
-        
+
         # File naming convention
         self.file_naming_convention_label = Label(window, text="File naming convention")
         self.file_naming_convention_label.grid(column=col_0, row = self.row)
@@ -145,7 +145,7 @@ class heGUI:
         self.patient_order_label = Label(window, text="Patient order in slide")
         self.patient_order_label.grid(row = self.row, column=col_0, columnspan=3)
 
-        self.row = self.row + 1 
+        self.row = self.row + 1
 
         # Insert new patient
         self.patient_order_name_label = Label(window, text="Name of patient")
@@ -167,7 +167,7 @@ class heGUI:
         self.patient_order_treeview.heading('#1', text='Name')
 
         self.row = self.row + 1
-        
+
         self.patient_order_remove_button = Button(window, text="Remove selected row", command = lambda : self.remove_item())
         self.patient_order_remove_button.grid(column=col_0, row=self.row, columnspan=3)
         self.row = self.row + 1
@@ -182,7 +182,7 @@ class heGUI:
         frame.grid(column=0, row= self.row, columnspan=3)
         # frame.pack(pady=20)
 
-        
+
         self.optical_coor_entry = Label(frame, text="Optical Coordinates (x,y)")
         self.optical_coor_entry.grid(column=2, row=self.row, columnspan=2)
 
@@ -269,7 +269,6 @@ class heGUI:
         sep5 = Separator(window,orient=HORIZONTAL).grid(row=self.row, column=col_0,  columnspan=5, sticky='we')
         self.row = self.row + 1
 
-        
         self.generate_json_button = Button(window, text = "Save JSON", width = 30, command = lambda : self.save_json())
         self.generate_json_button.grid(column=col_0, columnspan=3, row = self.row)
         self.row = self.row + 1
@@ -285,15 +284,15 @@ class heGUI:
 
 
     def remove_item(self):
-        selected_items = self.patient_order_treeview.selection()        
-        for selected_item in selected_items:          
+        selected_items = self.patient_order_treeview.selection()
+        for selected_item in selected_items:
             self.patient_order_treeview.delete(selected_item)
-        
+
         i=0
         for child in self.patient_order_treeview.get_children():
             self.patient_order_treeview.item(child, text=i, values=self.patient_order_treeview.item(child)['values'])
             i = i + 1
-        
+
         self.treeview_row = self.treeview_row - 1
 
     def select_file(self, entry: StringVar, filetype = "Image"):
@@ -309,7 +308,7 @@ class heGUI:
             initialdir=os.getcwd())
         entry.set(foldername)
         return
-    
+
     def place_landmarks(self):
         if len(self.optical_image_entry.get())==0:
             messagebox.showerror(title="Transformibi [source]", message="No optical image file selected")
@@ -321,7 +320,7 @@ class heGUI:
         self.source_image = io.imread(self.optical_image_entry.get())
         self.target_image = io.imread(self.he_image_entry.get())
         self.target_image = he_script.resize_(self.source_image, self.target_image)
-        
+
         self.source_viewer = napari.Viewer(title='Transformibi [source]')
         self.target_viewer = napari.Viewer(title='Transformibi [target]')
         self.source_viewer.add_image(self.source_image)
@@ -335,9 +334,9 @@ class heGUI:
 
         self.optical_placed = True
         self.he_placed = True
-        
+
         return
-    
+
     def check_annotation(self):
          ## SECOND STEP: PERFORM ALIGNMENT
         pts_ref = np.flip(self.target_points.data, axis=1)
@@ -345,8 +344,8 @@ class heGUI:
         transformed_target = img_as_ubyte(he_script.align_images(self.target_image, pts_ref, pts_mov))
 
         i = len(self.patient_order_treeview.get_children())
-            
-        
+
+
         ## THIRD STEP: get coordinates from he annotations
         contours, binary_rect = he_script.get_annotation_coords(transformed_target)
         coord = he_script.get_corners(contours, i)
@@ -354,7 +353,7 @@ class heGUI:
         #coord = coord[coord[:, 0].argsort()]
         pad = lambda x: np.hstack([x, np.ones((x.shape[0], 1))])
         unpad = lambda x: x[:, :-1]
-        
+
         self.A, res, rank, s = he_script.transformation(pad(self.get_optical_coord()), pad(self.get_sed_coord()))
 
         ## FOURTH STEP: plot coordinates and adjust if needed
@@ -376,7 +375,7 @@ class heGUI:
             len(self.point_three_x_entry.get())==0 | len(self.point_one_y_entry.get())==0):
             messagebox.showerror(title="Optical coordinates", message="One or more of the optical coordinates are not filled")
             return
-        
+
         return np.array([
                 [int(self.point_one_x_entry.get()), int(self.point_one_y_entry.get())],
                 [int(self.point_two_x_entry.get()), int(self.point_two_y_entry.get())], 
@@ -388,7 +387,7 @@ class heGUI:
             len(self.point_three_x_sed_entry.get())==0 | len(self.point_one_y_sed_entry.get())==0):
             messagebox.showerror(title="Optical coordinates", message="One or more of the optical coordinates are not filled")
             return
-        
+
         return np.array([
                 [int(self.point_one_x_sed_entry.get()), int(self.point_one_y_sed_entry.get())],
                 [int(self.point_two_x_sed_entry.get()), int(self.point_two_y_sed_entry.get())], 
@@ -416,13 +415,13 @@ class heGUI:
             return
         if len(self.output_entry.get()) == 0:
             messagebox.showerror(title="Check FOVs", message="No output folder selected")
-            return 
+            return
         if len(self.file_naming_convention_entry.get()) == 0:
             messagebox.showerror(title="Check FOVs", message="No file naming convention provided")
-            return 
+            return
         if len(self.fov_combobox.get()) == 0:
             messagebox.showerror(title="Check FOVs", message="No FOV selected")
-            return 
+            return
 
         ## Concatenate coordinates and sort again in case it has been adjusted
         result = np.concatenate((self.test_points_min.data, self.test_points_max.data), axis=1)
@@ -461,7 +460,7 @@ class heGUI:
         except Exception as e:
             messagebox.showerror(title="Check FOVs", message=e.args)
             return
-        
+
         final_x, final_y, self.options = get_fovs(transformed_FOV_min, patient_info, fov_size, FOV_grid)
 
         ## EIGTH STEP: PLOT THE COORDINATES OF ALL FOVS
@@ -472,7 +471,7 @@ class heGUI:
         fovs_coord_viewer.add_points(np.flip(fovs_coord_sed[:, :2], axis=1))
         napari.run()
 
-        return 
+        return
 
     def save_json(self):
         if self.options == None:
@@ -484,7 +483,7 @@ class heGUI:
         messagebox.showinfo(title="Save JSON", message="Saved")
         return
 
-    
+
 
 
 window = Tk()

@@ -1,7 +1,7 @@
 """
 The purpose of this project is to create a user friendly way of transfering
 annotations made on H&E slides in QuPath or CaseViewer onto the optical image
-which will be used in the scanning in MIBI. 
+which will be used in the scanning in MIBI.
 
 @Author: Nina Tubau & Kenta Yokote
 """
@@ -34,7 +34,7 @@ def tile(x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, m
         overlap_y: The degree of overlap between tiles in the y direction.
     '''
 
-    
+
     x = int(x_0)
     y = int(y_0)
     overlap_x_microns = fov_size * overlap_x
@@ -48,7 +48,7 @@ def tile(x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, m
 
             options.add_fov(
                 scanCount=1,
-                centerPointMicronX=int(cur_x), 
+                centerPointMicronX=int(cur_x),
                 centerPointMicronY=int(cur_y),
                 fovSizeMicrons=fov_size,
                 name=f'{map_patient}_{str(int(xi))}_{str(int(yi))}',
@@ -181,7 +181,7 @@ def get_annotation_coords(target_image):
     # skeletonised = skeletonize(new_image > 0)
     label_im = label(new_image.astype(np.uint8))
     regions = regionprops(label_im)
-    
+
 
     # contours = find_contours(new_image)
     return regions, new_image
@@ -213,9 +213,9 @@ def get_corners(regions, n_annots):
         #filtering out noise
         # if x_coord_max > 5+x_coord_min and y_coord_max > 5+y_coord_min:
         corners.append((x_coord_min, y_coord_min, x_coord_max, y_coord_max))
-    
+
     corners = sorted(corners, key=lambda element: (element[1], element[0]))
-    
+
     return np.array(corners)
 
 
@@ -252,7 +252,7 @@ def def_slide(mibi_tracker_ID: int, login_details: Dict, patient_order: Dict) ->
     :param mibi_tracker_ID: ID displayed in the first column in MIBI tracker
     :param login_details: Dictionay containing username, password and backend url
     :param patient_order: Ordering of the annotations in the slide
-    :return patient_info: 
+    :return patient_info:
     '''
     email = login_details["email"]
     password = login_details["password"]
@@ -295,7 +295,7 @@ def get_fovs(transformed_FOV_min, patient_info, fov_size, FOV_grid):
     final_x = np.empty(1)
     final_y = np.empty(1)
     assert transformed_FOV_min.shape[0] == len(patient_info['sectionMap']), 'There are more regions selected than patient, review your selections'
-    
+
     options = Options()
     for i in range(len(patient_info['sectionMap'])):
 
@@ -303,7 +303,7 @@ def get_fovs(transformed_FOV_min, patient_info, fov_size, FOV_grid):
         y_0 = transformed_FOV_min[i, 1] - fov_size/2
         xn = FOV_grid[i, 0]
         yn = FOV_grid[i, 1]
-        
+
         # Overlap between adjacent FOVs
         overlap_x = 0.1
         overlap_y = 0.1
@@ -311,12 +311,12 @@ def get_fovs(transformed_FOV_min, patient_info, fov_size, FOV_grid):
         slideID = patient_info['slideId']
         patient_map = patient_info['patientMap'][i]
 
-        
+
         x, y = tile(x_0, y_0, xn, yn, fov_size, overlap_x, overlap_y, slideID, sectionID, patient_map, options)
-        
+
 
         final_x = np.append(final_x, x)
         final_y = np.append(final_y, y)
-    
-    
+
+
     return final_x, final_y, options
