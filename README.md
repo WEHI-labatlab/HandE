@@ -1,7 +1,7 @@
 # MIBI scanning GUI
 
 ## Aim
-The aim of this project is to make configuring MIBI scans easier for a biologist.
+The aim of this project is to assist MIBI operators with field of view (FoV) selection based on reference images.
 
 ## Software Requirements
 The user is expected to have Anaconda3 installed. If you have not installed Anaconda3, you can find it here
