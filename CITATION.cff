@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Yokote"
+  given-names: "Kenta"
+  orcid: "https://orcid.org/0000-0002-0817-7076"
+- family-names: "Nina"
+  given-names: "Tubau"
+  orcid: ""
+- family-names: "Rickert"
+  given-names: "Christian"
+  ordic: ""
+title: "HandE"
+version: 1.0.0
+doi: 
+date-released: 
+url: "https://github.com/WEHI-labatlab/HE_GUI"
