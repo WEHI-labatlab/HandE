@@ -4,11 +4,11 @@
 The aim of this project is to assist MIBI operators with field of view (FoV) selection based on reference images.
 
 ## Software Requirements
-You can run HE_GUI from the command line using Python 3.7 plus all required libraries (see [environment.yml](https://github.com/WEHI-labatlab/HE_GUI/blob/main/environment.yml)).
+You can run HE_GUI from the command line using Python 3.8 plus all required libraries (see [environment.yml](https://github.com/WEHI-labatlab/HE_GUI/blob/main/environment.yml)).
 
 However, it's more convenient to use Miniconda - a small bootstrap version of Anaconda - instead.
 
-If you have not installed Miniconda for Python 3.7 yet, you can find it here:
+If you have not installed Miniconda for Python 3.8 yet, you can find it here:
 > https://docs.conda.io/en/latest/miniconda.html?highlight=3.7#windows-installers
 
 ## Installation with Miniconda
