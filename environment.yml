@@ -9,7 +9,7 @@ dependencies:
 - pip
 - pip:
     - magicgui[pyqt5]
-    - git+https://github.com/WEHI-labatlab/mibilib
+    - git+https://github.com/WEHI-labatlab/mibilib@test-pandas==1.4.4
     - napari[all]==0.4.16
     - python-dotenv==0.19.0
     - scikit-image==0.19.3
